@@ -25,6 +25,7 @@ import UIKit
 
 final class BTConfiguration {
     var menuTitleColor: UIColor?
+    var menuSubtitleColor: UIColor?
     var cellHeight: CGFloat!
     var cellBackgroundColor: UIColor?
     var cellSeparatorColor: UIColor?
@@ -32,6 +33,7 @@ final class BTConfiguration {
     var selectedCellTextLabelColor: UIColor?
     var cellTextLabelFont: UIFont!
     var navigationBarTitleFont: UIFont!
+    var navigationBarSubtitleFont: UIFont!
     var cellTextLabelAlignment: NSTextAlignment!
     var cellSelectionColor: UIColor?
     var checkMarkImage: UIImage!
@@ -39,10 +41,18 @@ final class BTConfiguration {
     var arrowTintColor: UIColor?
     var arrowImage: UIImage!
     var arrowPadding: CGFloat!
+    var subtitlePadding: CGFloat!
     var animationDuration: TimeInterval!
     var maskBackgroundColor: UIColor!
     var maskBackgroundOpacity: CGFloat!
     var shouldChangeTitleText: Bool!
+    var subtitleMode: Bool! {
+        didSet {
+            if subtitleMode == true {
+                shouldChangeTitleText = false
+            }
+        }
+    }
     
     init() {
         self.defaultValue()
@@ -57,7 +67,10 @@ final class BTConfiguration {
         let arrowImagePath = imageBundle?.path(forResource: "arrow_down_icon", ofType: "png")
         
         // Default values
+        self.subtitlePadding = 2
+        self.subtitleMode = false
         self.menuTitleColor = UIColor.darkGray
+        self.menuSubtitleColor = UIColor.darkGray
         self.cellHeight = 50
         self.cellBackgroundColor = UIColor.white
         self.arrowTintColor = UIColor.white
@@ -66,6 +79,7 @@ final class BTConfiguration {
         self.selectedCellTextLabelColor = UIColor.darkGray
         self.cellTextLabelFont = UIFont(name: "HelveticaNeue-Bold", size: 17)
         self.navigationBarTitleFont = UIFont(name: "HelveticaNeue-Bold", size: 17)
+        self.navigationBarSubtitleFont = UIFont(name: "HelveticaNeue-Bold", size: 14)
         self.cellTextLabelAlignment = NSTextAlignment.left
         self.cellSelectionColor = UIColor.lightGray
         self.checkMarkImage = UIImage(contentsOfFile: checkMarkImagePath!)
