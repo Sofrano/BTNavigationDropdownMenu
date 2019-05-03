@@ -20,7 +20,7 @@ This elegant **Swift** dropdown menu appears underneath the navigation bar to di
 
 ```ruby
 use_frameworks!
-pod 'BTNavigationDropdownMenu'
+pod 'BTNavigationDropdownMenu', :git => 'https://github.com/Sofrano/BTNavigationDropdownMenu.git', :branch => 'master'
 ```
 Go ahead and **import** BTNavigationDropdownMenu into your own Swift files 
 ```swift
