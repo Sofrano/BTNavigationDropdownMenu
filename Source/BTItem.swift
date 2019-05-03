@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 final public class BTItem {
-    var title: String!
-    var selectedImage: UIImage?
-    var defaultImage: UIImage?
+    public var title: String!
+    public var selectedImage: UIImage?
+    public var defaultImage: UIImage?
     
-    init(_ title: String,
-         defaultImage: UIImage? = nil,
-         selectedImage: UIImage? = nil) {
+    public init(_ title: String,
+                defaultImage: UIImage? = nil,
+                selectedImage: UIImage? = nil) {
         self.title = title
         self.selectedImage = selectedImage
         self.defaultImage = defaultImage
