@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5EDB277E227BE79F0073655F /* BTItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB277D227BE79F0073655F /* BTItem.swift */; };
 		AA8E37DE21830B69009609E6 /* Demo.png in Resources */ = {isa = PBXBuildFile; fileRef = AA8E37CE21830B69009609E6 /* Demo.png */; };
 		AA8E37DF21830B69009609E6 /* BTNavigationDropdownLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = AA8E37CF21830B69009609E6 /* BTNavigationDropdownLogo.png */; };
 		AA8E37E021830B69009609E6 /* Demo.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA8E37D021830B69009609E6 /* Demo.gif */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5EDB277D227BE79F0073655F /* BTItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTItem.swift; sourceTree = "<group>"; };
 		AA07A5972182FC7000C097DD /* BTNavigationDropdownMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BTNavigationDropdownMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8E37CE21830B69009609E6 /* Demo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Demo.png; sourceTree = "<group>"; };
 		AA8E37CF21830B69009609E6 /* BTNavigationDropdownLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BTNavigationDropdownLogo.png; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				AA8E37D721830B69009609E6 /* Internal */,
 				AA8E37DC21830B69009609E6 /* BTNavigationDropdownMenu.bundle */,
 				AA8E37DD21830B69009609E6 /* Info.plist */,
+				5EDB277D227BE79F0073655F /* BTItem.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				AA8E37E421830B69009609E6 /* UIViewController+Extension.swift in Sources */,
 				AA8E37E521830B69009609E6 /* BTTableViewCell.swift in Sources */,
 				AA8E37E321830B69009609E6 /* UIView+Extension.swift in Sources */,
+				5EDB277E227BE79F0073655F /* BTItem.swift in Sources */,
 				AA8E37E721830B69009609E6 /* BTTableView.swift in Sources */,
 				AA8E37E621830B69009609E6 /* BTTableCellContentView.swift in Sources */,
 				AA8E37E221830B69009609E6 /* BTTitle.swift in Sources */,

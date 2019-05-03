@@ -30,18 +30,18 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     var selectRowAtIndexPathHandler: ((_ indexPath: Int) -> ())?
     
     // Private properties
-    var items: [String] = []
+    var items: [BTItem] = []
     var selectedIndexPath: Int?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(frame: CGRect, items: [String], title: String, configuration: BTConfiguration) {
+    init(frame: CGRect, items: [BTItem], title: String, configuration: BTConfiguration) {
         super.init(frame: frame, style: UITableView.Style.plain)
         
         self.items = items
-        self.selectedIndexPath = items.index(of: title)
+        self.selectedIndexPath = items.firstIndex(where: {$0.title == title})
         self.configuration = configuration
         
         // Setup table view
@@ -76,8 +76,19 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = BTTableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "Cell", configuration: self.configuration)
-        cell.textLabel?.text = self.items[(indexPath as NSIndexPath).row]
-        cell.checkmarkIcon.isHidden = ((indexPath as NSIndexPath).row == selectedIndexPath) ? false : true
+        let item = self.items[(indexPath as NSIndexPath).row]
+        let isSelected = ((indexPath as NSIndexPath).row == selectedIndexPath)
+        cell.textLabel?.text = item.title
+        
+        if item.selectedImage == nil && item.defaultImage == nil {
+            cell.checkmarkIcon.isHidden = !isSelected
+        } else {
+            cell.checkmarkIcon.isHidden = false
+            let defaultImage = item.defaultImage ?? item.selectedImage
+            let selectedImage = item.selectedImage ?? item.defaultImage
+            cell.checkmarkIcon.image = isSelected ? selectedImage : defaultImage
+        }
+        
         return cell
     }
     

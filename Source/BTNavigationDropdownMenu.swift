@@ -253,7 +253,7 @@ open class BTNavigationDropdownMenu: UIView {
     fileprivate var menuArrow: UIImageView!
     fileprivate var backgroundView: UIView!
     fileprivate var tableView: BTTableView!
-    fileprivate var items: [String]!
+    fileprivate var items: [BTItem]!
     fileprivate var menuWrapper: UIView!
 
     required public init?(coder aDecoder: NSCoder) {
@@ -274,7 +274,7 @@ open class BTNavigationDropdownMenu: UIView {
                             containerView: UIView = UIApplication.shared.keyWindow!,
                             title: String,
                             subtitle: String? = nil,
-                            items: [String]) {
+                            items: [BTItem]) {
         self.init(navigationController: navigationController,
                   containerView: containerView,
                   title: BTTitle.title(title),
@@ -298,7 +298,7 @@ open class BTNavigationDropdownMenu: UIView {
                 containerView: UIView = UIApplication.shared.keyWindow!,
                 title: BTTitle,
                 subtitle: BTTitle?,
-                items: [String]) {
+                items: [BTItem]) {
         // Key window
         guard let window = UIApplication.shared.keyWindow else {
             super.init(frame: CGRect.zero)
@@ -324,7 +324,7 @@ open class BTNavigationDropdownMenu: UIView {
         switch title {
         case .index(let index):
             if index < items.count{
-                titleToDisplay = items[index]
+                titleToDisplay = items[index].title
             } else {
                 titleToDisplay = ""
             }
@@ -336,7 +336,7 @@ open class BTNavigationDropdownMenu: UIView {
             switch subtitle {
             case .index(let index):
                 if index < items.count{
-                    subtitleToDisplay = items[index]
+                    subtitleToDisplay = items[index].title
                 } else {
                     subtitleToDisplay = ""
                 }
@@ -414,18 +414,24 @@ open class BTNavigationDropdownMenu: UIView {
         // Init table view
         let navBarHeight = self.navigationController?.navigationBar.bounds.size.height ?? 0
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        self.tableView = BTTableView(frame: CGRect(x: menuWrapperBounds.origin.x, y: menuWrapperBounds.origin.y + 0.5, width: menuWrapperBounds.width, height: menuWrapperBounds.height + 300 - navBarHeight - statusBarHeight), items: items, title: titleToDisplay, configuration: self.configuration)
-
+        let tableFrame = CGRect(x: menuWrapperBounds.origin.x,
+                                y: menuWrapperBounds.origin.y + 0.5,
+                                width: menuWrapperBounds.width,
+                                height: menuWrapperBounds.height + 300 - navBarHeight - statusBarHeight)
+        self.tableView = BTTableView(frame: tableFrame,
+                                     items: items,
+                                     title: titleToDisplay,
+                                     configuration: self.configuration)
         self.tableView.selectRowAtIndexPathHandler = { [weak self] (indexPath: Int) -> () in
             guard let selfie = self else {
                 return
             }
             selfie.didSelectItemAtIndexHandler!(indexPath)
             if selfie.shouldChangeTitleText! {
-                selfie.setMenuTitle("\(selfie.tableView.items[indexPath])")
+                selfie.setMenuTitle(selfie.tableView.items[indexPath].title)
             }
             if selfie.configuration.subtitleMode {
-                selfie.setSubtitle("\(selfie.tableView.items[indexPath])")
+                selfie.setSubtitle(selfie.tableView.items[indexPath].title)
             }
             self?.hideMenu()
             self?.layoutSubviews()
@@ -491,7 +497,7 @@ open class BTNavigationDropdownMenu: UIView {
         }
     }
 
-    open func updateItems(_ items: [String]) {
+    open func updateItems(_ items: [BTItem]) {
         if !items.isEmpty {
             self.tableView.items = items
             self.tableView.reloadData()
