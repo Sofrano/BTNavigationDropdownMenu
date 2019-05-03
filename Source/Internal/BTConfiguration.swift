@@ -46,6 +46,7 @@ final class BTConfiguration {
     var maskBackgroundColor: UIColor!
     var maskBackgroundOpacity: CGFloat!
     var shouldChangeTitleText: Bool!
+    var cellIconWidth: CGFloat = 30
     var subtitleMode: Bool! {
         didSet {
             if subtitleMode == true {

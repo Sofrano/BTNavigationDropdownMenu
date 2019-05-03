@@ -24,7 +24,7 @@
 import UIKit
 
 class BTTableViewCell: UITableViewCell {
-    let checkmarkIconWidth: CGFloat = 50
+    var checkmarkIconWidth: CGFloat = 50
     let horizontalMargin: CGFloat = 20
     
     var checkmarkIcon: UIImageView!
@@ -35,7 +35,7 @@ class BTTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.configuration = configuration
-        
+        checkmarkIconWidth = configuration.cellIconWidth + 20
         // Setup cell
         cellContentFrame = CGRect(x: 0, y: 0, width: (UIApplication.shared.keyWindow?.frame.width)!, height: self.configuration.cellHeight)
         self.contentView.backgroundColor = self.configuration.cellBackgroundColor
@@ -53,11 +53,14 @@ class BTTableViewCell: UITableViewCell {
         
         // Checkmark icon
         if self.textLabel!.textAlignment == .center {
-            self.checkmarkIcon = UIImageView(frame: CGRect(x: cellContentFrame.width - checkmarkIconWidth, y: (cellContentFrame.height - 30)/2, width: 30, height: 30))
+            self.checkmarkIcon = UIImageView(frame: CGRect(x: cellContentFrame.width - checkmarkIconWidth,
+                                                           y: (cellContentFrame.height - configuration.cellIconWidth)/2,
+                                                           width: configuration.cellIconWidth,
+                                                           height: configuration.cellIconWidth))
         } else if self.textLabel!.textAlignment == .left {
-            self.checkmarkIcon = UIImageView(frame: CGRect(x: cellContentFrame.width - checkmarkIconWidth, y: (cellContentFrame.height - 30)/2, width: 30, height: 30))
+            self.checkmarkIcon = UIImageView(frame: CGRect(x: cellContentFrame.width - checkmarkIconWidth, y: (cellContentFrame.height - configuration.cellIconWidth)/2, width: configuration.cellIconWidth, height: configuration.cellIconWidth))
         } else {
-            self.checkmarkIcon = UIImageView(frame: CGRect(x: horizontalMargin, y: (cellContentFrame.height - 30)/2, width: 30, height: 30))
+            self.checkmarkIcon = UIImageView(frame: CGRect(x: horizontalMargin, y: (cellContentFrame.height - configuration.cellIconWidth)/2, width: configuration.cellIconWidth, height: configuration.cellIconWidth))
         }
         self.checkmarkIcon.isHidden = true
         self.checkmarkIcon.image = self.configuration.checkMarkImage

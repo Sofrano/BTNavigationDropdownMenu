@@ -129,6 +129,15 @@ open class BTNavigationDropdownMenu: UIView {
         }
     }
 
+    open var cellIconWidth: CGFloat! {
+        get {
+            return self.configuration.cellIconWidth
+        }
+        set(value) {
+            self.configuration.cellIconWidth = value
+        }
+    }
+    
     // The alignment of the text inside cell. Default is .Left
     open var cellTextLabelAlignment: NSTextAlignment! {
         get {
